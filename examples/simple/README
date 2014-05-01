@@ -1,0 +1,10 @@
+SIMPLE EXAMPLE
+==============
+
+INSTALLATION
+
+1. copy script-engine-simple.properties to /etc/ovirt-engine/extensions.d
+2. copy ovirt-engine-extension-script-engine.conf to
+   /etc/ovirt-engine/engine.conf.d/20-ovirt-engine-extension-script-engine.conf
+   replace @SOURCEDIR@ with the location of where sources are.
+3. restart engine.

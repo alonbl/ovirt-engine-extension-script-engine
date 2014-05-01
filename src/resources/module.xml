@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module xmlns="urn:jboss:module:1.1" name="org.ovirt.engine-extensions.script-engine">
+	<resources>
+		<resource-root path="ovirt-engine-extension-script-engine.jar"/>
+	</resources>
+	<dependencies>
+		<module name="javax.api"/>
+		<module name="org.ovirt.engine.api.ovirt-engine-extensions-api"/>
+		<module name="org.slf4j"/>
+		<module name="sun.scripting"/>
+		<system export="true">
+			<paths>
+				<path name="META-INF/services"/>
+			</paths>
+		</system>
+	</dependencies>
+</module>

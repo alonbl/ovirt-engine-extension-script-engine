@@ -1,0 +1,66 @@
+oVirt Script Engine Gateway Extension
+=====================================
+
+This extension enables implementation of extensions using Java
+Script Engine technology.
+
+The actual implementation is derived from the script engine
+requirements, but basically, a construction function returns
+object instance of Extension interface.
+
+Example of JavaScript engine is:
+
+    function MyExtension() {}
+    MyExtension.prototype = {
+    invoke: function(input, output) {
+    },
+    };
+    function create() {
+        return new MyExtension();
+    }
+
+IMPLEMENTATION NOTES
+--------------------
+
+INTEGERS
+
+Make sure to use the Java native integer and not script engine
+number type. This can be done by calling java.lang.Integer.valueOf(v).
+
+CONFIGURATION
+-------------
+
+/etc/ovirt-enigne/extensions.d/<name>.conf
+
+ovirt.engine.extension.name = @NAME@
+ovirt.engine.extension.bindings.method = jbossmodule
+ovirt.engine.extension.binding.jbossmodule.module = org.ovirt.engine-extensions.script-engine
+ovirt.engine.extension.binding.jbossmodule.class = org.ovirt.engineextensions.scriptengine.ScriptEngineExtension
+config.scriptengine.engine = @ENGINE@ [JavaScript]
+config.scriptengine.script.@SCRIPTID@ = @SCRIPTPATH@
+config.scriptengine.function = @CREATEFUNC@ [create]
+
+@NAME@
+    Extension instance name.
+
+@ENGINE@
+    Script Engine name.
+    Default: JavaScript.
+
+@SCRIPTID@
+    Id of script, scripts are loaded into same engine by the order of
+    script id.
+
+@SCRIPTPATH@
+    Script file name.
+    System properties expansion is supported at the form of ${property}.
+
+@CREATEFUNC@
+    Create function name.
+    Called during initialization to create the extension instance.
+    Default: create
+
+EXAMPLES
+--------
+
+- simple, see examples/simple/README
