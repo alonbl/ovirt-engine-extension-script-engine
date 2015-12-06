@@ -19,6 +19,29 @@ Example of JavaScript engine is:
         return new MyExtension();
     }
 
+STATUS
+------
+
+Due to JBoss modules handling of class path the javascript engine (at least)
+does not work as it cannot find a common class loader for both ScriptObject
+and the application objects that should be exposed via the script engine.
+
+  TypeError: Can not find a common class loader for ScriptObject and XXX
+
+This is inherit issue within jboss modules, as every module has its own
+class loader. A union class loader does not provide remedy as the actual
+class loader of various of classes remains the original one.
+
+Workaround can be applied by:
+1. adding all classes that are to be exposed into boot classpath.
+2. use reflection to query script objects/interfaces.
+
+Both are unacceptable for maintaining a component.
+
+Reference for example:
+https://developer.jboss.org/thread/261167?start=0&tstart=0&_sscc=t
+
+
 IMPLEMENTATION NOTES
 --------------------
 
